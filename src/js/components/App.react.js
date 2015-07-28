@@ -5,6 +5,7 @@ var OAuthActions = require('../actions/OAuthActions');
 var OAuthStore = require('../stores/OAuthStore');
 var OAuth = require('../oauth/oauth');
 var UserInfoActions = require('../actions/UserInfoActions');
+var TabSet = require('./TabSet.react');
 
 var App = React.createClass({
   getInitialState: function() {
@@ -32,10 +33,29 @@ var App = React.createClass({
 
 
   render: function() {
+    var tabs = [
+      {
+        isActive: false,
+        label: 'Account',
+        href: 'http://www.salesforce.com'
+      },
+      {
+        isActive: true,
+        label: 'Case',
+        href: 'http://www.salesforce.com'
+      },
+      {
+        isActive: false,
+        label: 'Lead',
+        href: 'http://www.salesforce.com'
+      }
+    ];
+
     return (
       <div>
         <AccountConnect />
         <ListView entities={this.state.entities} />
+        <TabSet tabs={tabs} />
       </div>
     );
   }
