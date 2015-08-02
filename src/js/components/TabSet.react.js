@@ -7,11 +7,7 @@ var Tab = require('./Tab.react');
 var TabsetActions = require('../actions/TabsetActions');
 
 function getTab(tabConfig) {
-  var onClickHandler = function() {
-    TabsetActions.activateTab(this.props.id, tabConfig.id);
-  }.bind(this);
-
-  return <Tab onClick={onClickHandler} id={tabConfig.id} isActive={tabConfig.isActive} href={tabConfig.href}>{tabConfig.label}</Tab>;
+  return <Tab tabsetId={this.props.id} id={tabConfig.id} isActive={tabConfig.isActive} href={tabConfig.href}>{tabConfig.label}</Tab>;
 }
 
 var Tabset = React.createClass({
