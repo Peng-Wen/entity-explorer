@@ -4,17 +4,17 @@ var React = require('React');
 var Tab = require('./Tab.react');
 
 // Actions
-var TabSetActions = require('../actions/TabSetActions');
+var TabsetActions = require('../actions/TabsetActions');
 
 function getTab(tabConfig) {
   var onClickHandler = function() {
-    TabSetActions.activateTab(this.props.id, tabConfig.id);
+    TabsetActions.activateTab(this.props.id, tabConfig.id);
   }.bind(this);
 
   return <Tab onClick={onClickHandler} id={tabConfig.id} isActive={tabConfig.isActive} href={tabConfig.href}>{tabConfig.label}</Tab>;
 }
 
-var TabSet = React.createClass({
+var Tabset = React.createClass({
   propTypes: {
     id: React.PropTypes.string.isRequired,
     tabs: React.PropTypes.array.isRequired
@@ -29,4 +29,4 @@ var TabSet = React.createClass({
   }
 });
 
-module.exports = TabSet;
+module.exports = Tabset;

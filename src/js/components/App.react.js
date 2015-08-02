@@ -3,16 +3,16 @@ var React = require('react');
 // Components
 var AccountConnect = require('./AccountConnect.react');
 var ListView = require('./ListView.react');
-var TabSet = require('./TabSet.react');
+var Tabset = require('./Tabset.react');
 
 // Actions
 var OAuthActions = require('../actions/OAuthActions');
 var UserInfoActions = require('../actions/UserInfoActions');
-var TabSetActions = require('../actions/TabSetActions');
+var TabsetActions = require('../actions/TabsetActions');
 
 // Stores
 var OAuthStore = require('../stores/OAuthStore');
-var TabSetStore = require('../stores/TabSetStore');
+var TabsetStore = require('../stores/TabsetStore');
 
 // Utilities
 var OAuth = require('../oauth/oauth');
@@ -23,7 +23,7 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       entities: [{name: '#1', id: 1}, {name: '#2', id: 2}, {name: '#3', id: 3}],
-      tabs: TabSetStore.getTabs(TAB_SET_ID)
+      tabs: TabsetStore.getTabs(TAB_SET_ID)
     };
   },
 
@@ -31,31 +31,31 @@ var App = React.createClass({
     UserInfoActions.fetchUserInfo();
   },
 
-  handleTabSetChange: function() {
-    var tabs = TabSetStore.getTabs(TAB_SET_ID);
+  handleTabsetChange: function() {
+    var tabs = TabsetStore.getTabs(TAB_SET_ID);
     this.setState({tabs: tabs});
   },
 
   componentWillMount: function() {
-    TabSetActions.addTab(TAB_SET_ID, {
+    TabsetActions.addTab(TAB_SET_ID, {
       isActive: true,
       label: 'Account',
       href: '#'
     });
 
-    TabSetActions.addTab(TAB_SET_ID, {
+    TabsetActions.addTab(TAB_SET_ID, {
       isActive: true,
       label: 'Case',
       href: '#'
     });
 
-    TabSetActions.addTab(TAB_SET_ID, {
+    TabsetActions.addTab(TAB_SET_ID, {
       isActive: true,
       label: 'Lead',
       href: '#'
     });
 
-    this.setState({tabs: TabSetStore.getTabs(TAB_SET_ID)});
+    this.setState({tabs: TabsetStore.getTabs(TAB_SET_ID)});
   },
 
   componentDidMount: function() {
@@ -68,16 +68,16 @@ var App = React.createClass({
       OAuthActions.saveTokenInfo(tokenInfo);
     }
 
-    TabSetStore.addChangeListener(this.handleTabSetChange);
+    TabsetStore.addChangeListener(this.handleTabsetChange);
   },
 
   componentWillUnmount: function() {
     OAuthStore.removeChangeListener(this.handleOAuthTokenInfoChange);
-    TabSetStore.removeChangeListener(this.handleTabSetChange);
+    TabsetStore.removeChangeListener(this.handleTabsetChange);
   },
 
   addTab: function() {
-    TabSetActions.addTab(TAB_SET_ID, {
+    TabsetActions.addTab(TAB_SET_ID, {
       isActive: false,
       label: 'Custom',
       href: '#'
@@ -85,7 +85,7 @@ var App = React.createClass({
   },
 
   removeTab: function() {
-    TabSetActions.removeTab(TAB_SET_ID, '1');
+    TabsetActions.removeTab(TAB_SET_ID, '1');
   },
 
   render: function() {
@@ -93,7 +93,7 @@ var App = React.createClass({
       <div>
         <AccountConnect />
         <ListView entities={this.state.entities} />
-        <TabSet id="primary-tabs" tabs={this.state.tabs} />
+        <Tabset id="primary-tabs" tabs={this.state.tabs} />
         <button onClick={this.addTab}>Add Tab</button>
         <button onClick={this.removeTab}>Remove Tab</button>
       </div>

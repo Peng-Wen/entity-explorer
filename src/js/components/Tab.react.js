@@ -1,7 +1,7 @@
 var React = require('react');
 var classnames = require('classnames');
 
-var TabSetActions = require('../actions/TabSetActions');
+var TabsetActions = require('../actions/TabsetActions');
 
 var Tab = React.createClass({
   propTypes: {
@@ -11,7 +11,7 @@ var Tab = React.createClass({
   },
 
   // handleClick: function() {
-  //   TabSetActions.activateTab('primary-tabs', this.props.id);
+  //   TabsetActions.activateTab('primary-tabs', this.props.id);
   // },
 
   render: function() {
