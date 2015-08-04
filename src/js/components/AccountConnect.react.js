@@ -40,9 +40,9 @@ var AccountConnect = React.createClass({
 
   render: function() {
     return this.state.userName ? (
-      <span>{this.state.userName}</span>
+      <p className="navbar-text">{this.state.userName}</p>
     ) : (
-      <button onClick={this.handleClick}>Connect to SFDC</button>
+      <li><a href="javascript:void(0)" onClick={this.handleClick}>Connect to SFDC</a></li>
     );
   }
 });
