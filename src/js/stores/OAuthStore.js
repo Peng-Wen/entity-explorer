@@ -1,27 +1,13 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
+var BaseStore = require('./BaseStore');
 var ACTION_CONSTANTS = require('../constants/actions');
 var _ = require('lodash');
 
-var CHANGE_EVENT = 'change';
-
 var _tokenInfo = {};
 
-var OAuthStore = _.assign({}, EventEmitter.prototype, {
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
+var OAuthStore = _.assign({}, BaseStore, {
   getTokenInfo: function() {
     return _.cloneDeep(_tokenInfo);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
   }
 });
 
@@ -31,9 +17,6 @@ AppDispatcher.register(function(action) {
       _tokenInfo = _.cloneDeep(action.payload.tokenInfo || {});
       OAuthStore.emitChange();
       break;
-    default:
-      // TODO: provide better logging / error handling
-      console.log('Should not reach here! No OAuth action matched: ' + action.type);
   }
 });
 

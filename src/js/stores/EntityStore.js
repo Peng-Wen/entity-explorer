@@ -1,11 +1,8 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
+var BaseStore = require('./BaseStore');
 var _ = require('lodash');
 
-var CHANGE_EVENT = 'change';
-
-var EntityStore = _.assign({}, EventEmitter.prototype, {
-
+var EntityStore = _.assign({}, BaseStore, {
 });
 
 module.exports = EntityStore;

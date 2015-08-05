@@ -1,9 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
+var BaseStore = require('./BaseStore');
 var ACTION_CONSTANTS = require('../constants/actions');
 var _ = require('lodash');
-
-var CHANGE_EVENT = 'change';
 
 // {tabSetId: {activeTabId: 'active-tab-id', tabs: []}}
 var _tabsets = {};
@@ -15,11 +13,7 @@ function assignTabId(tab) {
   tab.id = (_tabIdCounter++).toString();
 }
 
-var TabsetStore = _.assign({}, EventEmitter.prototype, {
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
+var TabsetStore = _.assign({}, BaseStore, {
   getTabs: function(tabsetId) {
     var tabs = [];
     var tabset = _tabsets[tabsetId];
@@ -32,14 +26,6 @@ var TabsetStore = _.assign({}, EventEmitter.prototype, {
     }
 
     return tabs;
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
   }
 });
 
@@ -92,9 +78,6 @@ AppDispatcher.register(function(action) {
       }
 
       break;
-    default:
-      // TODO: provide better logging / error handling
-      console.log('Should not reach here! No Tabset action matched: ' + action.type);
   }
 });
 
