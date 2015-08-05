@@ -28,7 +28,7 @@ var Tab = React.createClass({
       <li role="presentation" onClick={this.handleClick} className={className}>
         <a href={this.props.href}>
           {this.props.children}
-          <span style={{marginLeft: '0.5em'}} className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.handleRemove}></span>
+          <button type="button" className="close" style={{marginLeft: '0.3em', lineHeight: '0.8'}} onClick={this.handleRemove} aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </a>
       </li>
     );
